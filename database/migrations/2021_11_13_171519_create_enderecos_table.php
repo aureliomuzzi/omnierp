@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClassificacaoTable extends Migration
+class CreateEnderecosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,20 @@ class CreateClassificacaoTable extends Migration
      */
     public function up()
     {
-        Schema::create('classificacao', function (Blueprint $table) {
+        Schema::create('enderecos', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('pessoa_id')->nullable();
             $table->foreign('pessoa_id')->references('id')->on('pessoas')->onUpdate('restrict')->onDelete('restrict');
 
-            $table->string('descricao', 50)->comment("MATRIZ | FILIAL | MEI | ONG | INDIVIDUAL");
-            $table->boolean('cliente')->default(0);
-            $table->boolean('fornecedor')->default(0);
-            $table->boolean('transportador')->default(0);
-            $table->boolean('status')->default(1);
+            $table->string('cep', 10)->nullable();
+            $table->string('logradouro')->nullable();
+            $table->string('numero', 5)->nullable();
+            $table->string('complemento')->nullable();
+            $table->string('bairro')->nullable();
+            $table->string('localidade')->nullable();
+            $table->string('uf', 2)->nullable();
+
             $table->timestamps();
         });
     }
@@ -35,6 +38,6 @@ class CreateClassificacaoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('classificacao');
+        Schema::dropIfExists('enderecos');
     }
 }

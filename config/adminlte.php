@@ -229,7 +229,7 @@ return [
         ['header' => 'Cadastro Geral'],
         [
             'text'        => 'Pessoas',
-            'url'         => 'admin/pages',
+            'url'         => 'pessoas',
             'icon'        => 'fas fa-users',
         ],
         ['header' => 'account_settings'],

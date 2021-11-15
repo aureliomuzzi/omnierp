@@ -19,8 +19,11 @@ class CreatePessoasTable extends Migration
             $table->string('nome')->comment("Nome Completo se PF | Razão Social se PJ");
             $table->string('fantasia')->nullable();
             $table->string('cpf_cnpj');
-            $table->string('insc_estadual')->nullable();
-            $table->string('insc_municipal')->nullable();
+            $table->string('classificacao', 50)->comment("MATRIZ | FILIAL | MEI | ONG | INDIVIDUAL");
+            $table->boolean('cliente')->nullable();
+            $table->boolean('fornecedor')->nullable();
+            $table->boolean('transportador')->nullable();
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

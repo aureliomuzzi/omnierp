@@ -48,6 +48,11 @@
     {{-- Custom Stylesheets (post AdminLTE) --}}
     @yield('adminlte_css')
 
+    <link rel="stylesheet" type="text/css" href="/css/datatables.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="/css/icheck-bootstrap.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-switch.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-toggle.min.css"></link>
+
     {{-- Favicon --}}
     @if(config('adminlte.use_ico_only'))
         <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" />
@@ -103,6 +108,110 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
+
+    <script src="/js/sweetalert.min.js"></script>
+    <script src="/js/datatables.min.js"></script>
+    <script src="/js/chart.min.js"></script>
+    <script src="/js/jquery.mask.min.js"></script>
+    <script src="/js/bootstrap-switch.min.js"></script>
+    <script src="/js/bootstrap-toggle.min.js"></script>
+
+    <script>
+        function confirmarExclusao(event) {
+            event.preventDefault();
+            swal({
+                title: "Voce tem certeza que deseja excluir esse registro?",
+                icon: "warning",
+                dangerMode: true,
+                buttons: {
+                cancel: "Cancelar",
+                catch: {
+                    text: "Excluir",
+                    value: true,
+                },
+                }
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                event.target.submit();
+                } else {
+                return false;
+                }
+            });
+        }
+        $(function () {
+            $('#datatable').DataTable({
+                language: {
+                    url: "/js/translate_pt-br.json"
+                },
+                paging: false
+            });
+            $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="switch"]').bootstrapSwitch();
+            $('#status').bootstrapToggle({
+                on: 'Ativo',
+                off: 'Inativo'
+            });
+        });
+        // API ViaCEP -- Inicio --
+            var inputsCEP = $('#logradouro, #bairro, #localidade, #uf', '#cep');
+            var inputsRUA = $('#cep, #bairro');
+            var validacep = /^[0-9]{8}$/;
+            function limpar(alerta) {
+                if (alerta !== undefined) {
+                    swal({
+                        title: alerta,
+                        icon: "warning",
+                        buttons:{
+                            cancel: "Fechar"
+                        }
+                    });
+                    inputsCEP.val('');
+                }
+            }
+            function get(url) {
+                $.get(url, function(data) {
+                    if (!("erro" in data)) {
+                        if (Object.prototype.toString.call(data) === '[object Array]') {
+                            var data = data[0];
+                        }
+                        $.each(data, function(nome, info) {
+                            $('#' + nome).val(nome === 'cep' ? info.replace(/\D/g, '') : info).attr('info', nome === 'cep' ? info.replace(/\D/g, '') : info);
+                        });
+                    } else {
+                        limpar("CEP não encontrado.");
+                    }
+                });
+            }
+            // Digitando CEP
+            $('#cep').on('blur', function(e) {
+                var cep = $('#cep').val().replace(/\D/g, '');
+                if (cep !== "" && validacep.test(cep)) {
+                    inputsCEP.val('Localizando...');
+                    get('https://viacep.com.br/ws/' + cep + '/json/');
+                } else {
+                    limpar(cep == "" ? undefined : "Formato de CEP inválido.");
+                }
+            });
+        // API ViaCEP -- Fim --
+        $('.isFone').mask('(00) 00000-0000');
+        $('.isCPF').mask('000.000.000-00');
+        $('.isCNPJ').mask('00.000.000/0000-00');
+        window.onload = () => {
+            $("#tipoPessoa").on('change', function(e){
+                var tipoDocumento;
+                if ($(this).val() == 'PF') {
+                    $("#documento").val('');
+                    $("#documento").mask('000.000.000-00');
+                } else if($(this).val() == 'PJ') {
+                    $("#documento").val('');
+                    $("#documento").mask('00.000.000/0000-00');
+                }
+            });
+        }
+    </script>
+    @yield('javascript')
+
 
 </body>
 
