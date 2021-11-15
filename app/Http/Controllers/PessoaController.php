@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Pessoa;
 use Illuminate\Http\Request;
+use App\Http\Requests\PessoaRequest;
+use App\Helpers\FuncoesHelper;
 
 class PessoaController extends Controller
 {
@@ -14,7 +16,9 @@ class PessoaController extends Controller
      */
     public function index()
     {
-        return view('pessoas.index');
+        return view('pessoas.index', [
+            'pessoas' => Pessoa::paginate(10),
+        ]);
     }
 
     /**
@@ -33,9 +37,23 @@ class PessoaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PessoaRequest $request)
     {
-        dd($request->all());
+        $dados = [
+            'tipo' => $request->tipo,
+            'nome' => $request->nome,
+            'fantasia' => $request->fantasia,
+            'cpf_cnpj' => FuncoesHelper::removerCaracter($request->cpf_cnpj),
+            'classificacao' => $request->classificacao,
+            'cliente' => $request->cliente,
+            'fornecedor' => $request->fornecedor,
+            'transportador' => $request->transportador,
+            'status' => $request->status
+        ];
+    
+        Pessoa::create($dados);
+
+        return redirect('/pessoas')->with('mensagem', 'Registro criado com sucesso!');
     }
 
     /**

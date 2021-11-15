@@ -147,7 +147,9 @@
                 paging: false
             });
             $('[data-toggle="tooltip"]').tooltip();
+
             $('[data-toggle="switch"]').bootstrapSwitch();
+            
             $('#status').bootstrapToggle({
                 on: 'Ativo',
                 off: 'Inativo'
@@ -198,14 +200,37 @@
         $('.isCPF').mask('000.000.000-00');
         $('.isCNPJ').mask('00.000.000/0000-00');
         window.onload = () => {
-            $("#tipoPessoa").on('change', function(e){
-                var tipoDocumento;
+            $("input[name='tipo']").change(function(){
                 if ($(this).val() == 'PF') {
-                    $("#documento").val('');
-                    $("#documento").mask('000.000.000-00');
-                } else if($(this).val() == 'PJ') {
-                    $("#documento").val('');
-                    $("#documento").mask('00.000.000/0000-00');
+                    $("#cpf_cnpj").val('');
+                    $("#fantasia").val('');
+                    $("#fantasia").prop('disabled', true);
+
+                    $("#clMatriz").prop('disabled',true);
+                    $("#clMatriz").prop('checked',false);
+                    
+                    $("#clFilial").prop('disabled',true);
+                    $("#clFilial").prop('checked',false);
+
+                    $("#clMei").prop('disabled',true);
+                    $("#clMei").prop('checked',false);
+
+                    $("#clOng").prop('disabled',true);
+                    $("#clOng").prop('checked',false);
+
+                    $("#cpf_cnpj").mask('000.000.000-00');
+                }
+            });
+
+            $("input[name='tipo']").change(function(){
+                if ($(this).val() == 'PJ') {
+                    $("#cpf_cnpj").val('');
+                    $("#fantasia").prop('disabled', false);
+                    $("#clMatriz").prop('disabled',false);
+                    $("#clFilial").prop('disabled',false);
+                    $("#clMei").prop('disabled',false);
+                    $("#clOng").prop('disabled',false);
+                    $("#cpf_cnpj").mask('00.000.000/0000-00');
                 }
             });
         }

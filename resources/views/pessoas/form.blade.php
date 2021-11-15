@@ -121,11 +121,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="fantasia">Nome Fantasia</label>
-                                        <input type="text" name="fantasia" placeholder="Digite o nome fantasia" class="form-control" value="{{ isset($pessoa) ? $pessoa->fantasia : null }}">
+                                        <input type="text" id="fantasia" name="fantasia" placeholder="Digite o nome fantasia" class="form-control" value="{{ isset($pessoa) ? $pessoa->fantasia : null }}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="documento">CPF ou CNPJ</label>
-                                        <input type="text" id="documento" name="documento" placeholder="Numero de CPF ou CNPJ" class="form-control" value="{{ isset($pessoa) ? $pessoa->cpf_cnpj : null }}">
+                                        <label id="lbDoc" for="cpf_cnpj">CPF ou CNPJ</label>
+                                        <input type="text" id="cpf_cnpj" name="cpf_cnpj" placeholder="Numero de CPF ou CNPJ" class="form-control" value="{{ isset($pessoa) ? $pessoa->cpf_cnpj : null }}">
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -138,22 +138,22 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="icheck-primary">
-                                        <input type="checkbox" id="cliente" name="cliente" value= 1, {{ isset($pessoa) && $pessoa->cliente == 1 ? true : false }} />
+                                        <input type="checkbox" id="cliente" name="cliente" value= "1", {{ isset($pessoa) && $pessoa->cliente == 1 ? 'checked' : '' }} />
                                         <label for="cliente">Cliente</label>
                                     </div>
                                     <div class="icheck-warning">
-                                        <input type="checkbox" id="fornecedor" name="fornecedor" value= 1, {{ isset($pessoa) && $pessoa->fornecedor == 1 ? true : false }} />
+                                        <input type="checkbox" id="fornecedor" name="fornecedor" value= "1", {{ isset($pessoa) && $pessoa->fornecedor == 1 ? 'checked' : '' }} />
                                         <label for="fornecedor">Fornecedor</label>
                                     </div>
                                     <div class="icheck-danger">
-                                        <input type="checkbox" id="transportador" name="transportador" value= 1, {{ isset($pessoa) && $pessoa->transportador == 1 ? true : false }} />
+                                        <input type="checkbox" id="transportador" name="transportador" value= "1", {{ isset($pessoa) && $pessoa->transportador == 1 ? 'checked' : ''  }} />
                                         <label for="transportador">Transportador</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="card card-info">
                                 <div class="card-header">
-                                    <h3 class="card-title">Ativar ou Inativar Empresa</h3>
+                                    <h3 class="card-title">Ativar ou Inativar Pessoa</h3>
                                 </div>
                                 <div class="card-body text-center">
                                     <input  type="checkbox" 
@@ -162,7 +162,7 @@
                                         name="status"
                                         data-onstyle="success" 
                                         data-offstyle="danger"                                            
-                                        value= 1, {{ isset($pessoa) && $pessoa->status == 1 ? true : false }} 
+                                        value= "1", {{ isset($pessoa) && $pessoa->status == 1 ? 'checked' : ''  }} 
                                     />
                                 </div>
                             </div>
