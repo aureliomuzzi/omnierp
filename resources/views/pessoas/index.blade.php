@@ -42,13 +42,15 @@
                         @foreach ($pessoas as $pessoa)
                             <tr>
                                 <td>
-                                    <a href="/pessoa/{{ $pessoa->id }}/edit" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Editar Item"><i class="fas fa-pen"></i></a>
-                                    <form action="/pessoa/{{ $pessoa->id }}" class="d-inline-block" method="POST" onSubmit="confirmarExclusao(event)">
+                                    <a href="/pessoas/{{ $pessoa->id }}/edit" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Editar Item"><i class="fas fa-pen"></i></a>
+                                    <form action="/pessoas/{{ $pessoa->id }}" class="d-inline-block" method="POST" onSubmit="confirmarExclusao(event)">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-sm btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Excluir Item"><i class="fas fa-trash"></i></button>
                                     </form>
-                                    <a href="/pessoa/{{ $pessoa->id }}" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="top" title="Exibir Informações Completas"><i class="fas fa-eye"></i></a>
+                                    <a href="#" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Cadastrar Endereços"><i class="fas fa-list"></i></a>
+                                    <a href="#" class="btn btn-outline-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Cadastrar Contatos"><i class="fas fa-phone-alt"></i></a>
+                                    <a href="/pessoas/{{ $pessoa->id }}" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="top" title="Exibir Informações Completas"><i class="fas fa-eye"></i></a>
                                 </td>
                                 <td>{{ $pessoa->nome }}</td>
         

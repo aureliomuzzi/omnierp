@@ -13,4 +13,5 @@ Route::middleware('auth')->group(function() {
     });
 
     Route::resource('pessoas', PessoaController::class);
+    Route::resource('enderecos', EnderecoController::class);
 });

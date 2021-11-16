@@ -28,7 +28,7 @@ class PessoaRequest extends FormRequest
             'classificacao' => 'required',
             'nome' => 'required',
             'cpf_cnpj' => 'required',
-            'status' =>'required',
+            //'status' =>'required',
         ];
     }
 
@@ -39,7 +39,7 @@ class PessoaRequest extends FormRequest
             'classificacao.required' => 'A Classificacao de Pessoa é obrigatório',
             'nome.required' => 'O campo Nome da Pessoa é obrigatório',
             'cpf_cnpj.required' => 'O número de CPF ou CNPJ é obrigatório',
-            'status.required' => 'O campo Status é obrigatório',
+            //'status.required' => 'O campo Status é obrigatório',
         ];
     }
 }

@@ -49,13 +49,13 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="icheck-primary">
-                                                <input type="radio" id="tipoPF" name="tipo" value="PF", {{ isset($pessoa) && $pessoa->tipo == "PF" ? true : false }} />
+                                                <input type="radio" id="tipoPF" name="tipo" value="PF", {{ isset($pessoa) && $pessoa->tipo == "PF" ? 'checked' : '' }} />
                                                 <label for="tipoPF">Pessoa Física</label>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="icheck-warning">
-                                                <input type="radio" id="tipoPJ" name="tipo" value="PJ", {{ isset($pessoa) && $pessoa->tipo == "PJ" ? true : false }} />
+                                                <input type="radio" id="tipoPJ" name="tipo" value="PJ", {{ isset($pessoa) && $pessoa->tipo == "PJ" ? 'checked' : '' }} />
                                                 <label for="tipoPJ">Pessoa Jurídica</label>
                                             </div>
                                         </div>
@@ -73,31 +73,31 @@
                                     <div class="row">
                                         <div class="col-sm-2">
                                             <div class="icheck-primary">
-                                                <input type="radio" id="clMatriz" name="classificacao" value="MATRIZ", {{ isset($pessoa) && $pessoa->classificacao == "MATRIZ" ? true : false }} />
+                                                <input type="radio" id="clMatriz" name="classificacao" value="MATRIZ", {{ isset($pessoa) && $pessoa->classificacao == "MATRIZ" ? 'checked' : '' }} />
                                                 <label for="clMatriz">MATRIZ</label>
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
                                             <div class="icheck-secondary">
-                                                <input type="radio" id="clFilial" name="classificacao" value="FILIAL", {{ isset($pessoa) && $pessoa->classificacao == "FILIAL" ? true : false }} />
+                                                <input type="radio" id="clFilial" name="classificacao" value="FILIAL", {{ isset($pessoa) && $pessoa->classificacao == "FILIAL" ? 'checked' : '' }} />
                                                 <label for="clFilial">FILIAL</label>
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
                                             <div class="icheck-warning">
-                                                <input type="radio" id="clMei" name="classificacao" value="MEI", {{ isset($pessoa) && $pessoa->classificacao == "MEI" ? true : false }} />
+                                                <input type="radio" id="clMei" name="classificacao" value="MEI", {{ isset($pessoa) && $pessoa->classificacao == "MEI" ? 'checked' : '' }} />
                                                 <label for="clMei">MEI</label>
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
                                             <div class="icheck-danger">
-                                                <input type="radio" id="clOng" name="classificacao" value="ONG", {{ isset($pessoa) && $pessoa->classificacao == "ONG" ? true : false }} />
+                                                <input type="radio" id="clOng" name="classificacao" value="ONG", {{ isset($pessoa) && $pessoa->classificacao == "ONG" ? 'checked' : '' }} />
                                                 <label for="clOng">ONG</label>
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
                                             <div class="icheck-info">
-                                                <input type="radio" id="clIndividual" name="classificacao" value="INDIVIDUAL", {{ isset($pessoa) && $pessoa->classificacao == "INDIVIDUAL" ? true : false }} />
+                                                <input type="radio" id="clIndividual" name="classificacao" value="INDIVIDUAL", {{ isset($pessoa) && $pessoa->classificacao == "INDIVIDUAL" ? 'checked' : '' }} />
                                                 <label for="clIndividual">INDIVIDUAL</label>
                                             </div>
                                         </div>
@@ -138,15 +138,15 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="icheck-primary">
-                                        <input type="checkbox" id="cliente" name="cliente" value= "1", {{ isset($pessoa) && $pessoa->cliente == 1 ? 'checked' : '' }} />
+                                        <input type="checkbox" id="cliente" name="cliente" value= "1", {{ isset($pessoa) && $pessoa->cliente == 1 ? 'checked' : 0 }} />
                                         <label for="cliente">Cliente</label>
                                     </div>
                                     <div class="icheck-warning">
-                                        <input type="checkbox" id="fornecedor" name="fornecedor" value= "1", {{ isset($pessoa) && $pessoa->fornecedor == 1 ? 'checked' : '' }} />
+                                        <input type="checkbox" id="fornecedor" name="fornecedor" value= "1", {{ isset($pessoa) && $pessoa->fornecedor == 1 ? 'checked' : 0 }} />
                                         <label for="fornecedor">Fornecedor</label>
                                     </div>
                                     <div class="icheck-danger">
-                                        <input type="checkbox" id="transportador" name="transportador" value= "1", {{ isset($pessoa) && $pessoa->transportador == 1 ? 'checked' : ''  }} />
+                                        <input type="checkbox" id="transportador" name="transportador" value= "1", {{ isset($pessoa) && $pessoa->transportador == 1 ? 'checked' : 0  }} />
                                         <label for="transportador">Transportador</label>
                                     </div>
                                 </div>

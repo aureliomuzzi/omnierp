@@ -75,7 +75,9 @@ class PessoaController extends Controller
      */
     public function edit(Pessoa $pessoa)
     {
-        //
+        return view('pessoas.form', [
+            'pessoa' => $pessoa
+        ]);
     }
 
     /**
@@ -85,9 +87,23 @@ class PessoaController extends Controller
      * @param  \App\Models\Pessoa  $pessoa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pessoa $pessoa)
+    public function update(PessoaRequest $request, Pessoa $pessoa)
     {
-        //
+        $dados = [
+            'tipo' => $request->tipo,
+            'nome' => $request->nome,
+            'fantasia' => $request->fantasia,
+            'cpf_cnpj' => FuncoesHelper::removerCaracter($request->cpf_cnpj),
+            'classificacao' => $request->classificacao,
+            'cliente' => $request->cliente == '' ? 0 : 1,
+            'fornecedor' => $request->fornecedor == '' ? 0 : 1,
+            'transportador' => $request->transportador == '' ? 0 : 1,
+            'status' => $request->status == '' ? 0 : 1 
+        ];
+    
+        $pessoa->update($dados);
+
+        return redirect('/pessoas')->with('mensagem', 'Registro criado com sucesso!');
     }
 
     /**
@@ -98,6 +114,8 @@ class PessoaController extends Controller
      */
     public function destroy(Pessoa $pessoa)
     {
-        //
+        $pessoa->delete();
+
+        return redirect('/pessoas')->with('mensagem', 'Registro excluído com sucesso!');
     }
 }
