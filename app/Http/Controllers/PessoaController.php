@@ -6,6 +6,7 @@ use App\Models\Pessoa;
 use Illuminate\Http\Request;
 use App\Http\Requests\PessoaRequest;
 use App\Helpers\FuncoesHelper;
+use App\DataTables\PessoaDataTable;
 
 class PessoaController extends Controller
 {
@@ -14,11 +15,9 @@ class PessoaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(PessoaDataTable $dataTable)
     {
-        return view('pessoas.index', [
-            'pessoas' => Pessoa::paginate(10),
-        ]);
+        return $dataTable->render('pessoas.index');
     }
 
     /**
@@ -50,7 +49,7 @@ class PessoaController extends Controller
             'transportador' => $request->transportador,
             'status' => $request->status
         ];
-    
+
         Pessoa::create($dados);
 
         return redirect('/pessoas')->with('mensagem', 'Registro criado com sucesso!');
@@ -98,9 +97,9 @@ class PessoaController extends Controller
             'cliente' => $request->cliente == '' ? 0 : 1,
             'fornecedor' => $request->fornecedor == '' ? 0 : 1,
             'transportador' => $request->transportador == '' ? 0 : 1,
-            'status' => $request->status == '' ? 0 : 1 
+            'status' => $request->status == '' ? 0 : 1
         ];
-    
+
         $pessoa->update($dados);
 
         return redirect('/pessoas')->with('mensagem', 'Registro criado com sucesso!');

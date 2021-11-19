@@ -52,6 +52,7 @@
     <link rel="stylesheet" type="text/css" href="/css/icheck-bootstrap.min.css"></link>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-switch.min.css"></link>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-toggle.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="/css/buttons.dataTables.min.css"></link>
 
     {{-- Favicon --}}
     @if(config('adminlte.use_ico_only'))
@@ -115,6 +116,9 @@
     <script src="/js/jquery.mask.min.js"></script>
     <script src="/js/bootstrap-switch.min.js"></script>
     <script src="/js/bootstrap-toggle.min.js"></script>
+    <script src="/js/dataTables.buttons.min.js"></script>
+    <script src="/js/buttons.bootstrap4.min.js"></script>
+    <script src="/vendor/datatables/buttons.server-side.js"></script>
 
     <script>
         function confirmarExclusao(event) {
@@ -149,7 +153,7 @@
             $('[data-toggle="tooltip"]').tooltip();
 
             $('[data-toggle="switch"]').bootstrapSwitch();
-            
+
             $('#status').bootstrapToggle({
                 on: 'Ativo',
                 off: 'Inativo'
@@ -208,7 +212,7 @@
 
                     $("#clMatriz").prop('disabled',true);
                     $("#clMatriz").prop('checked',false);
-                    
+
                     $("#clFilial").prop('disabled',true);
                     $("#clFilial").prop('checked',false);
 
