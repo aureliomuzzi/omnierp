@@ -21,8 +21,6 @@
             </div>
         @endif
 
-        <a href="/pessoas/create" class="btn btn-primary mb-5">Novo Registro</a>
-
         <div class="table-responsive table-striped w-100">
             {{ $dataTable->table() }}
         </div>

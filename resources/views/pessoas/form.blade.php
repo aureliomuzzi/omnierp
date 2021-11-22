@@ -38,7 +38,7 @@
                 @endif
 
                     @csrf
-                     
+
                     <div class="row">
                         <div class="col-lg-4 col-md-12">
                             <div class="card card-info">
@@ -145,7 +145,7 @@
                                         <input type="checkbox" id="fornecedor" name="fornecedor" value= "1", {{ isset($pessoa) && $pessoa->fornecedor == 1 ? 'checked' : 0 }} />
                                         <label for="fornecedor">Fornecedor</label>
                                     </div>
-                                    <div class="icheck-danger">
+                                    <div class="icheck-success">
                                         <input type="checkbox" id="transportador" name="transportador" value= "1", {{ isset($pessoa) && $pessoa->transportador == 1 ? 'checked' : 0  }} />
                                         <label for="transportador">Transportador</label>
                                     </div>
@@ -156,13 +156,13 @@
                                     <h3 class="card-title">Ativar ou Inativar Pessoa</h3>
                                 </div>
                                 <div class="card-body text-center">
-                                    <input  type="checkbox" 
-                                        data-handle-width="100" 
-                                        id="status" 
+                                    <input  type="checkbox"
+                                        data-handle-width="100"
+                                        id="status"
                                         name="status"
-                                        data-onstyle="success" 
-                                        data-offstyle="danger"                                            
-                                        value= "1", {{ isset($pessoa) && $pessoa->status == 1 ? 'checked' : ''  }} 
+                                        data-onstyle="success"
+                                        data-offstyle="danger"
+                                        value= "1", {{ isset($pessoa) && $pessoa->status == 1 ? 'checked' : 0  }}
                                     />
                                 </div>
                             </div>

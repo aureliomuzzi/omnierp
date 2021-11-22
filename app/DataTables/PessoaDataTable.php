@@ -8,6 +8,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use App\Helpers\FuncoesHelper;
 
 class PessoaDataTable extends DataTable
 {
@@ -21,7 +22,48 @@ class PessoaDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'pessoa.action');
+            ->editColumn('action', function($query) {
+                return '<a href="' . route('pessoas.edit', $query) . '" class="btn btn-primary btn-xs"><i class="fas fa-pen text-xs px-1"></i></a>
+                <a onclick="deleteRegister(this)" href="javascript:void(0)" data-rota="' . '#' . '" class="btn btn-danger btn-xs"><i class="fas fa-trash text-xs px-1"></i></a>';
+            })
+            ->editColumn('cpf_cnpj', function($query) {
+                return $query->cpf_cnpj;
+            })
+            ->editColumn('cliente', function($query) {
+                if ($query->cliente == 1) {
+                    return '<span class="badge badge-primary"> Sim </span>';
+                } else {
+                    return '<span class="badge badge-danger"> Não </span>';
+                }
+            })
+            ->editColumn('fornecedor', function($query) {
+                if ($query->fornecedor == 1) {
+                    return '<span class="badge badge-warning"> Sim </span>';
+                } else {
+                    return '<span class="badge badge-danger"> Não </span>';
+                }
+            })
+            ->editColumn('transportador', function($query) {
+                if ($query->transportador == 1) {
+                    return '<span class="badge badge-success"> Sim </span>';
+                } else {
+                    return '<span class="badge badge-danger"> Não </span>';
+                }
+            })
+            ->editColumn('status', function($query) {
+                if ($query->status_formatado == "Ativo") {
+                    return '<span class="badge badge-primary"> Ativo </span>';
+                } else {
+                    return '<span class="badge badge-danger"> Inativo </span>';
+                }
+            })
+            ->editColumn('created_at', function($query) {
+                return $query->created_at->format("d/m/Y H:i");
+            })
+            ->editColumn('updated_at', function($query) {
+                return $query->updated_at->format("d/m/Y H:i");
+            })
+            ->rawColumns(['action', 'cliente','fornecedor','transportador', 'status']);
     }
 
     /**
@@ -49,14 +91,15 @@ class PessoaDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->buttons(
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        //Button::make('create'),
-                        //Button::make('export'),
-                        //Button::make('print'),
-                        //Button::make('reset'),
-                        //Button::make('reload')
-                    );
+                        Button::make('excel')->text("<i class='fas fa-file-excel'></i> Exportar Excel"),
+                        Button::make('print')->text("<i class='fas fa-print'></i> Imprimir"),
+                        Button::make('create')->text("<i class='fas fa-plus'></i> Novo Registro"),
+                    )
+                    ->parameters([
+                        "language" => [
+                            "url" => "/js/translate_pt-br.json"
+                        ]
+                    ]);
     }
 
     /**
@@ -67,21 +110,15 @@ class PessoaDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            // Column::computed('action')
-            //       ->exportable(false)
-            //       ->printable(false)
-            //       ->width(60)
-            //       ->addClass('text-center'),
-            // Column::make('id'),
-            // Column::make('add your columns'),
-            // Column::make('created_at'),
-            // Column::make('updated_at'),
-            'nome',
-            'cpf_cnpj',
-            'cliente',
-            'fornecedor',
-            'transportador',
-            'status'
+            Column::make('action')->title('Ações')->searchable(false)->orderable(false),
+            Column::make('nome'),
+            Column::make('cpf_cnpj')->title('Documento'),
+            Column::make('cliente')->searchable(false)->orderable(false)->addClass('text-center'),
+            Column::make('fornecedor')->searchable(false)->orderable(false)->addClass('text-center'),
+            Column::make('transportador')->searchable(false)->orderable(false)->addClass('text-center'),
+            Column::make('status')->searchable(false)->orderable(false)->addClass('text-center'),
+            Column::make('created_at')->title('Cadastro')->addClass('text-center'),
+            Column::make('updated_at')->title('Atualizado')->addClass('text-center'),
         ];
     }
 
