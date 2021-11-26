@@ -41,4 +41,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    const STATUS_ATIVO = 1;
+    const STATUS_INATIVO = 0;
+    const STATUS = [
+        Pessoa::STATUS_ATIVO => "Ativo",
+        Pessoa::STATUS_INATIVO => "Inativo"
+    ];
+
+    public function getStatusFormatadoAttribute()
+    {
+        return Pessoa::STATUS[$this->status];
+    }
 }

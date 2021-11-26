@@ -232,6 +232,11 @@ return [
             'url'         => 'pessoas',
             'icon'        => 'fas fa-users',
         ],
+        [
+            'text'        => 'Usuários',
+            'url'         => 'users',
+            'icon'        => 'fas fa-user',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

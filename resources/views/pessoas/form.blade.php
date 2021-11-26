@@ -37,7 +37,7 @@
                     <form action="/pessoas" method="POST" enctype="multipart/form-data">
                 @endif
 
-                    @csrf
+                @csrf
 
                     <div class="row">
                         <div class="col-lg-4 col-md-12">
