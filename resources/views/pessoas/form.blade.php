@@ -156,14 +156,15 @@
                                     <h3 class="card-title">Ativar ou Inativar Pessoa</h3>
                                 </div>
                                 <div class="card-body text-center">
-                                    <input  type="checkbox"
+                                    @component('components.status')@endcomponent
+                                    {{-- <input  type="checkbox"
                                         data-handle-width="100"
                                         id="status"
                                         name="status"
                                         data-onstyle="success"
                                         data-offstyle="danger"
                                         value= "1", {{ isset($pessoa) && $pessoa->status == 1 ? 'checked' : 0  }}
-                                    />
+                                    /> --}}
                                 </div>
                             </div>
                         </div>

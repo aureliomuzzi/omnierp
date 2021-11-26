@@ -45,11 +45,28 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    {!! Form::label('name', 'Nome do Usuário') !!}
+                                    {!! Form::label('name', 'Nome') !!}
                                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nome do Usuario']) !!}
+                                </div>
+                                <div class="form-group">
+                                    {!! Form::label('email', 'Email') !!}
+                                    {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Email do Usuario']) !!}
+                                </div>
+                                <div class="form-group">
+                                    @component('components.senha')@endcomponent
                                 </div>
                             </div>
                             <!-- /.card-body -->
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">Grupo de Acesso e Ativar / Inativar</h3>
+                            </div>
+                            <div class="card-body text-center">
+                                @component('components.status')@endcomponent
+                            </div>
                         </div>
                     </div>
                 </div>
