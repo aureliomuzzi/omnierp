@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\DataTables\UserDataTable;
 
@@ -35,7 +36,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dados = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'grupo' => $request->grupo,
+            'status' => $request->status
+        ];
+
+        User::create($dados);
+
+        return redirect('/users')->with('mensagem', 'Registro criado com sucesso!');
     }
 
     /**
@@ -80,6 +91,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $usuario = User::find($id);
+        $usuario->delete();
+        return redirect('/users')->with('mensagem', 'Registro excluído com sucesso!');
     }
 }
