@@ -13,8 +13,12 @@ Route::middleware('auth')->group(function() {
         return view('home');
     });
 
-    Route::resource('pessoas', PessoaController::class);
+    Route::resource('pessoas', PessoaController::class)->except(['destroy']);
+    Route::get('/pessoas/{id}/destroy', [PessoaController::class, 'destroy'])->name('pessoas.destroy');
+
     Route::resource('enderecos', EnderecoController::class);
     Route::resource('contatos', ContatoController::class);
-    Route::resource('users', UserController::class);
+
+    Route::resource('users', UserController::class)->except(['destroy']);
+    Route::get('/users/{id}/destroy', [UserController::class, 'destroy'])->name('users.destroy');
 });

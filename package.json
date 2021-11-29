@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "bootstrap-switch": "^3.4.0",
-        "icheck-bootstrap": "^3.0.1"
+        "icheck-bootstrap": "^3.0.1",
+        "sweetalert2": "^11.2.1"
     }
 }

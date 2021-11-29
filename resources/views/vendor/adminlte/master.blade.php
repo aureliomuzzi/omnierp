@@ -110,7 +110,7 @@
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
 
-    <script src="/js/sweetalert.min.js"></script>
+    <script src="/js/sweetalert2.min.js"></script>
     <script src="/js/datatables.min.js"></script>
     <script src="/js/chart.min.js"></script>
     <script src="/js/jquery.mask.min.js"></script>
@@ -121,29 +121,7 @@
     <script src="/vendor/datatables/buttons.server-side.js"></script>
 
     <script>
-        function confirmarExclusao(event) {
-            event.preventDefault();
-            swal({
-                title: "Voce tem certeza que deseja excluir esse registro?",
-                icon: "warning",
-                dangerMode: true,
-                buttons: {
-                cancel: "Cancelar",
-                catch: {
-                    text: "Excluir",
-                    value: true,
-                },
-                }
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                event.target.submit();
-                } else {
-                return false;
-                }
-            });
-        }
-        $(function () {
+        $(document).ready(function() {
             $('#datatable').DataTable({
                 language: {
                     url: "/js/translate_pt-br.json"
@@ -159,6 +137,24 @@
                 off: 'Inativo'
             });
         });
+
+        function confirmarExclusao(registro) {
+            const url = registro.getAttribute("data-rota");
+            swal.fire({
+                title: 'Deseja excluir esse registro?',
+                text: "O registro atualmente selecionado será excluído.",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não'
+            }).then(function (success) {
+                if (success.value === true) {
+                    window.location.href = url;
+                }
+            })
+        }
+
         // API ViaCEP -- Inicio --
             var inputsCEP = $('#logradouro, #bairro, #localidade, #uf', '#cep');
             var inputsRUA = $('#cep, #bairro');

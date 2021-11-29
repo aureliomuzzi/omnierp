@@ -24,7 +24,7 @@ class PessoaDataTable extends DataTable
             ->eloquent($query)
             ->editColumn('action', function($query) {
                 return '<a href="' . route('pessoas.edit', $query) . '" class="btn btn-primary btn-xs"><i class="fas fa-pen text-xs px-1"></i></a>
-                <a onclick="deleteRegister(this)" href="javascript:void(0)" data-rota="' . '#' . '" class="btn btn-danger btn-xs"><i class="fas fa-trash text-xs px-1"></i></a>';
+                <a onclick="confirmarExclusao(this)" href="javascript:void(0)" data-rota="' . route('pessoas.destroy', $query->id) . '" class="btn btn-danger btn-xs"><i class="fas fa-trash text-xs px-1"></i></a>';
             })
             ->editColumn('cpf_cnpj', function($query) {
                 return $query->cpf_cnpj;
