@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Pessoas')
+@section('title', 'Usuários')
 
 @section('content_header')
-<h1 class="m-0 text-dark"><i class="fas fa-users"></i> Pessoas
+<h1 class="m-0 text-dark"><i class="fas fa-user"></i> Usuários
     <small class="text-muted">- Formulário</small>
 </h1>
 @stop
@@ -53,7 +53,10 @@
                                     {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Email do Usuario']) !!}
                                 </div>
                                 <div class="form-group">
-                                    @component('components.senha')@endcomponent
+                                    <div class="form-group">
+                                        <label for="password">Senha</label>
+                                        <input type="password" id="password" name="password" placeholder="Digite a senha" class="form-control">
+                                    </div>                                 
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -62,12 +65,29 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="card card-info">
                             <div class="card-header">
-                                <h3 class="card-title">Grupo de Acesso e Ativar / Inativar</h3>
+                                <h3 class="card-title">Privilégio de Acesso</h3>
                             </div>
-                            <div class="card-body text-center">
-                                @component('components.status')@endcomponent
+                            <div class="card-body">
+                                <div class="icheck-dark">
+                                    <input type="radio" id="admin" name="grupo" value="A", {{ isset($user) && $user->grupo == "A" ? 'checked' : '' }} />
+                                    <label for="admin">Administrador</label>
+                                </div>
+                                <div class="icheck-info">
+                                    <input type="radio" id="supervisor" name="grupo" value="S", {{ isset($user) && $user->grupo == "S" ? 'checked' : '' }} />
+                                    <label for="supervisor">Supervisor</label>
+                                </div>
+                                <div class="icheck-success">
+                                    <input type="radio" id="gerente" name="grupo" value="G", {{ isset($user) && $user->grupo == "G" ? 'checked' : '' }} />
+                                    <label for="gerente">Gerente</label>
+                                </div>
+                                <div class="icheck-warning">
+                                    <input type="radio" id="usuario" name="grupo" value="U", checked, {{ isset($user) && $user->grupo == "U" ? 'checked' : '' }} />
+                                    <label for="usuario">Usuario</label>
+                                </div>
                             </div>
+                            <!-- /.card-body -->
                         </div>
+                        @component('components.status', ['status' => isset($user) && $user->status == 1 ? 1 : 0])@endcomponent
                     </div>
                 </div>
 

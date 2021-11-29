@@ -151,22 +151,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card card-info">
-                                <div class="card-header">
-                                    <h3 class="card-title">Ativar ou Inativar Pessoa</h3>
-                                </div>
-                                <div class="card-body text-center">
-                                    @component('components.status')@endcomponent
-                                    {{-- <input  type="checkbox"
-                                        data-handle-width="100"
-                                        id="status"
-                                        name="status"
-                                        data-onstyle="success"
-                                        data-offstyle="danger"
-                                        value= "1", {{ isset($pessoa) && $pessoa->status == 1 ? 'checked' : 0  }}
-                                    /> --}}
-                                </div>
-                            </div>
+                            @component('components.status', ['status' => isset($pessoa) && $pessoa->status == 1 ? 1 : 0])@endcomponent
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success">Salvar</button>
