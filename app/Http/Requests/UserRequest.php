@@ -24,7 +24,20 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'grupo' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'O Nome é obrigatório',
+            'email.required' => 'O Email é obrigatório',
+            'password.required' => 'A Senha é obrigatória',
+            'grupo.required' => 'O Grupo é obrigatório',
         ];
     }
 }

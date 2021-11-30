@@ -154,7 +154,10 @@
                             @component('components.status', ['status' => isset($pessoa) && $pessoa->status == 1 ? 1 : 0])@endcomponent
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success">Salvar</button>
+                    <div class="mt-5">
+                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Salvar</button>
+                        <a href="{{ route('pessoas.index') }}" class="btn btn-danger"><i class="far fa-times-circle"></i> Cancelar</a>
+                    </div>
 
                 </form>
                 <hr>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use App\DataTables\UserDataTable;
 
 class UserController extends Controller
@@ -34,7 +35,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         $dados = [
             'name' => $request->name,
@@ -43,7 +44,7 @@ class UserController extends Controller
             'grupo' => $request->grupo,
             'status' => $request->status
         ];
-
+        
         User::create($dados);
 
         return redirect('/users')->with('mensagem', 'Registro criado com sucesso!');
@@ -66,9 +67,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('users.form', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -78,9 +81,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $dados = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'grupo' => $request->grupo,
+            'status' => $request->status == '' ? 0 : 1
+        ];
+
+        $user->update($dados);
+
+        return redirect('/users')->with('mensagem', 'Registro criado com sucesso!');
     }
 
     /**
