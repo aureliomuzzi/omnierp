@@ -30,14 +30,11 @@
                     </div>
                 @endif
 
-                @if (isset($pessoa))
-                    <form action="/pessoas/{{ $pessoa->id }}" method="POST">
-                    @method('PUT')
+                @if (!isset($pessoa))
+                    {!! Form::open(['url' => route('pessoas.store'), 'files' => true]) !!}
                 @else
-                    <form action="/pessoas" method="POST" enctype="multipart/form-data">
+                    {!! Form::model($pessoa, ['route' => ['pessoas.update', $pessoa->id], 'method' => 'PUT', 'files' => true]) !!}
                 @endif
-
-                @csrf
 
                     <div class="row">
                         <div class="col-lg-4 col-md-12">
@@ -116,16 +113,20 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="nome">Nome da Pessoa</label>
-                                        <input type="text" name="nome" placeholder="Digite o nome da pessoa" class="form-control" value="{{ isset($pessoa) ? $pessoa->nome : null }}">
+                                        {!! Form::label('nome', 'Nome da Pessoa') !!}
+                                        {!! Form::text('nome', isset($pessoa) ? $pessoa->nome : null, ['class' => 'form-control', 'placeholder' => 'Digite o nome da pessoa']) !!}
                                     </div>
                                     <div class="form-group">
-                                        <label for="fantasia">Nome Fantasia</label>
-                                        <input type="text" id="fantasia" name="fantasia" placeholder="Digite o nome fantasia" class="form-control" value="{{ isset($pessoa) ? $pessoa->fantasia : null }}">
+                                        {!! Form::label('fantasia', 'Nome fantasia') !!}
+                                        {!! Form::text('fantasia', isset($pessoa) ? $pessoa->fantasia : null, ['class' => 'form-control', 'placeholder' => 'Digite o nome fantasia']) !!}
                                     </div>
                                     <div class="form-group">
-                                        <label id="lbDoc" for="cpf_cnpj">CPF ou CNPJ</label>
-                                        <input type="text" id="cpf_cnpj" name="cpf_cnpj" placeholder="Numero de CPF ou CNPJ" class="form-control" value="{{ isset($pessoa) ? $pessoa->cpf_cnpj : null }}">
+                                        {!! Form::label('cpf_cnpj', 'Documento Oficial') !!}
+                                        @if (isset($pessoa) && $pessoa->tipo == "PF")
+                                            {!! Form::text('cpf_cnpj', isset($pessoa) ? $pessoa->cpf_cnpj : null, ['class' => 'form-control isCPF' , 'placeholder' => 'Número de CPF ou CNPJ']) !!}
+                                        @else
+                                            {!! Form::text('cpf_cnpj', isset($pessoa) ? $pessoa->cpf_cnpj : null, ['class' => 'form-control isCNPJ' , 'placeholder' => 'Número de CPF ou CNPJ']) !!}
+                                        @endif
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -159,7 +160,7 @@
                         <a href="{{ route('pessoas.index') }}" class="btn btn-danger"><i class="far fa-times-circle"></i> Cancelar</a>
                     </div>
 
-                </form>
+                {!! Form::close() !!}
                 <hr>
             </div>
         </div>

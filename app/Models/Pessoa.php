@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\FuncoesHelper;
 
 
 class Pessoa extends Model
@@ -36,6 +37,16 @@ class Pessoa extends Model
     public function getStatusFormatadoAttribute()
     {
         return Pessoa::STATUS[$this->status];
+    }
+
+    public function getCpfAttribute()
+    {
+        return FuncoesHelper::mascara($this->cpf_cnpj, "cpf");
+    }
+
+    public function getCnpjAttribute()
+    {
+        return FuncoesHelper::mascara($this->cpf_cnpj, "cnpj");
     }
 
 }

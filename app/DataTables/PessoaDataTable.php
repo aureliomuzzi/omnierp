@@ -27,7 +27,10 @@ class PessoaDataTable extends DataTable
                 <a onclick="confirmarExclusao(this)" href="javascript:void(0)" data-rota="' . route('pessoas.destroy', $query->id) . '" class="btn btn-danger btn-xs"><i class="fas fa-trash text-xs px-1"></i></a>';
             })
             ->editColumn('cpf_cnpj', function($query) {
-                return $query->cpf_cnpj;
+                return $query->tipo == "PF" ? $query->cpf : $query->cnpj;
+            })
+            ->editColumn('tipo', function($query) {
+                return $query->tipo;
             })
             ->editColumn('cliente', function($query) {
                 if ($query->cliente == 1) {
@@ -63,7 +66,7 @@ class PessoaDataTable extends DataTable
             ->editColumn('updated_at', function($query) {
                 return $query->updated_at->format("d/m/Y H:i");
             })
-            ->rawColumns(['action', 'cliente','fornecedor','transportador', 'status']);
+            ->rawColumns(['action', 'cliente','fornecedor','transportador', 'status', 'cpf_cnpj']);
     }
 
     /**
@@ -113,6 +116,7 @@ class PessoaDataTable extends DataTable
             Column::make('action')->title('Ações')->searchable(false)->orderable(false),
             Column::make('nome'),
             Column::make('cpf_cnpj')->title('Documento'),
+            Column::make('tipo')->title('Tipo'),
             Column::make('cliente')->searchable(false)->orderable(false)->addClass('text-center'),
             Column::make('fornecedor')->searchable(false)->orderable(false)->addClass('text-center'),
             Column::make('transportador')->searchable(false)->orderable(false)->addClass('text-center'),

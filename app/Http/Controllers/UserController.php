@@ -42,9 +42,9 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'grupo' => $request->grupo,
-            'status' => $request->status
+            'status' => $request->status == '1' ? 1 : 0
         ];
-        
+
         User::create($dados);
 
         return redirect('/users')->with('mensagem', 'Registro criado com sucesso!');

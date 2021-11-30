@@ -47,7 +47,7 @@ class PessoaController extends Controller
             'cliente' => $request->cliente,
             'fornecedor' => $request->fornecedor,
             'transportador' => $request->transportador,
-            'status' => $request->status
+            'status' => $request->status == '1' ? 1 : 0
         ];
 
         Pessoa::create($dados);

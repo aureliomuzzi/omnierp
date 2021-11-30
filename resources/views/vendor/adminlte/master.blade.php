@@ -218,6 +218,8 @@
                     $("#clOng").prop('disabled',true);
                     $("#clOng").prop('checked',false);
 
+                    $('#clIndividual').prop('checked', true);
+
                     $("#cpf_cnpj").mask('000.000.000-00');
                 }
             });
@@ -230,6 +232,8 @@
                     $("#clFilial").prop('disabled',false);
                     $("#clMei").prop('disabled',false);
                     $("#clOng").prop('disabled',false);
+                    $('#clIndividual').prop('disabled', true);
+                    $('#clIndividual').prop('checked', false);
                     $("#cpf_cnpj").mask('00.000.000/0000-00');
                 }
             });
