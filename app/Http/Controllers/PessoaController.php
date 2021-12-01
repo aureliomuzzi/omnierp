@@ -39,6 +39,18 @@ class PessoaController extends Controller
      */
     public function store(PessoaRequest $request)
     {
+        $validador = new Validador();
+
+        if ($request->tipo == "PF") {
+            if ($validador->validaCPF($request->cpf_cnpj) == false) {
+                return redirect()->back()->with('mensagem', 'O Número de CPF é Inválido.');
+            }
+        } else {
+            if ($validador->validaCNPJ($request->cpf_cnpj) == false) {
+                return redirect()->back()->with('mensagem', 'O Número de CNPJ é Inválido.');
+            }
+        }
+
         $dados = [
             'tipo' => $request->tipo,
             'nome' => $request->nome,
@@ -100,7 +112,7 @@ class PessoaController extends Controller
                 return redirect()->back()->with('mensagem', 'O Número de CNPJ é Inválido.');
             }
         }
-    
+
         $dados = [
             'tipo' => $request->tipo,
             'nome' => $request->nome,
