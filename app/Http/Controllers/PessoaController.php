@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PessoaRequest;
 use App\Helpers\FuncoesHelper;
 use App\DataTables\PessoaDataTable;
+use App\Services\Validador;
 
 class PessoaController extends Controller
 {
@@ -88,6 +89,18 @@ class PessoaController extends Controller
      */
     public function update(PessoaRequest $request, Pessoa $pessoa)
     {
+        $validador = new Validador();
+
+        if ($pessoa->tipo == "PF") {
+            if ($validador->validaCPF($request->cpf_cnpj) == false) {
+                return redirect()->back()->with('mensagem', 'O Número de CPF é Inválido.');
+            }
+        } else {
+            if ($validador->validaCNPJ($request->cpf_cnpj) == false) {
+                return redirect()->back()->with('mensagem', 'O Número de CNPJ é Inválido.');
+            }
+        }
+    
         $dados = [
             'tipo' => $request->tipo,
             'nome' => $request->nome,

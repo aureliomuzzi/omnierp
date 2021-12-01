@@ -19,14 +19,9 @@
             </div>
 
             <div class="card-body">
-                @if($errors->any())
+                @if(session()->has('mensagem'))
                     <div class="alert alert-danger">
-                        <p><strong>Erro ao realizar esta operação</strong></p>
-                        <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                        </ul>
+                        {{ session()->get('mensagem') }}
                     </div>
                 @endif
 
