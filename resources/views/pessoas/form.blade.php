@@ -151,8 +151,10 @@
                         </div>
                     </div>
                     <div class="mt-5">
-                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Salvar</button>
-                        <a href="{{ route('pessoas.index') }}" class="btn btn-danger"><i class="far fa-times-circle"></i> Cancelar</a>
+                        <a href="#modalEndereco" data-toggle="modal" data-target="#modalEndereco" class="btn btn-outline-secondary"><i class="fas fa-address-card"></i> Endereço</a>
+                        <a href="#" data-toggle="modal" data-target="#modalContato" class="btn btn-outline-warning"><i class="fas fa-phone"></i> Contato</a>
+                        <a href="{{ route('pessoas.index') }}" class="btn btn-outline-dark"><i class="fas fa-list"></i> Listar</a>
+                        <button type="submit" class="btn btn-outline-success"><i class="fas fa-save"></i> Salvar</button>
                     </div>
 
                 {!! Form::close() !!}
@@ -161,4 +163,6 @@
         </div>
     </div>
 </div>
+@include('modais.add-endereco')
+@include('modais.add-contato')
 @stop

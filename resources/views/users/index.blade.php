@@ -23,7 +23,7 @@
             </div>
         @endif
 
-        <div class="table-responsive table-striped">
+        <div class="table-responsive table-striped w-100">
             {{ $dataTable->table() }}
         </div>
 
