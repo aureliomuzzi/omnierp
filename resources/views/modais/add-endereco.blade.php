@@ -5,7 +5,8 @@
               <h4 class="modal-title">Cadastro de Endereços</h4>
           </div>
           <div class="modal-body">
-              <p>Campos</p>
+            <p>Campos</p>
+            <input type="text" value="{{ $pessoa->id }}">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary">Save changes</button>
@@ -13,4 +14,4 @@
           </div>
       </div>
     </div>
-  </div>
+</div>

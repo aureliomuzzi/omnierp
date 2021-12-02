@@ -151,8 +151,10 @@
                         </div>
                     </div>
                     <div class="mt-5">
-                        <a href="#modalEndereco" data-toggle="modal" data-target="#modalEndereco" class="btn btn-outline-secondary"><i class="fas fa-address-card"></i> Endereço</a>
-                        <a href="#" data-toggle="modal" data-target="#modalContato" class="btn btn-outline-warning"><i class="fas fa-phone"></i> Contato</a>
+                        @if (isset($pessoa))
+                            <a href="#modalEndereco" data-toggle="modal" data-target="#modalEndereco" class="btn btn-outline-secondary"><i class="fas fa-address-card"></i> Endereço</a>
+                            <a href="#modalContato" data-toggle="modal" data-target="#modalContato" class="btn btn-outline-warning"><i class="fas fa-phone"></i> Contato</a>
+                        @endif
                         <a href="{{ route('pessoas.index') }}" class="btn btn-outline-dark"><i class="fas fa-list"></i> Listar</a>
                         <button type="submit" class="btn btn-outline-success"><i class="fas fa-save"></i> Salvar</button>
                     </div>
@@ -163,6 +165,9 @@
         </div>
     </div>
 </div>
-@include('modais.add-endereco')
-@include('modais.add-contato')
+@if (isset($pessoa))
+    @include('modais.add-endereco', ['pessoa_id' => $pessoa->id])
+    @include('modais.add-contato', ['pessoa_id' => $pessoa->id])
+@endif
+
 @stop

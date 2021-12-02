@@ -6,6 +6,7 @@
         </div>
         <div class="modal-body">
             <p>Campos</p>
+            <input type="text" value="{{ $pessoa->id }}">
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-primary">Save changes</button>
