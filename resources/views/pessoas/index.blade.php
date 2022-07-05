@@ -21,8 +21,8 @@
             </div>
         @endif
 
-        <div class="table-responsive table-striped w-100">
-            {{ $dataTable->table() }}
+        <div class="table-responsive">
+            {{ $dataTable->table(['style' => 'width: 100%']) }}
         </div>
 
 

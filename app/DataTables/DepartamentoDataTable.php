@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\User;
+use App\Models\Departamento;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class UserDataTable extends DataTable
+class DepartamentoDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -22,21 +22,11 @@ class UserDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('action', function($query) {
-                return '<a href="' . route('users.edit', $query) . '" class="btn btn-primary btn-xs"><i class="fas fa-pen text-xs px-1"></i></a>
-                <a onclick="confirmarExclusao(this)" href="javascript:void(0)" data-rota="' . route('users.destroy', $query->id) . '" class="btn btn-danger btn-xs"><i class="fas fa-trash text-xs px-1"></i></a>';
+                return '<a href="' . route('departamentos.edit', $query) . '" class="btn btn-primary btn-xs"><i class="fas fa-pen text-xs px-1"></i></a>
+                <a onclick="confirmarExclusao(this)" href="javascript:void(0)" data-rota="' . route('departamentos.destroy', $query->id) . '" class="btn btn-danger btn-xs"><i class="fas fa-trash text-xs px-1"></i></a>';
             })
-            ->editColumn('name', function($query) {
-                return $query->name;
-            })
-            ->editColumn('email', function($query) {
-                return $query->email;
-            })
-            ->editColumn('status', function($query) {
-                if ($query->status_formatado == "Ativo") {
-                    return '<span class="badge badge-primary"> Ativo </span>';
-                } else {
-                    return '<span class="badge badge-danger"> Inativo </span>';
-                }
+            ->editColumn('descricao', function($query) {
+                return $query->descricao;
             })
             ->editColumn('created_at', function($query) {
                 return $query->created_at->format("d/m/Y H:i");
@@ -50,10 +40,10 @@ class UserDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\User $model
+     * @param \App\Models\Departamento $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model)
+    public function query(Departamento $model)
     {
         return $model->newQuery();
     }
@@ -66,7 +56,7 @@ class UserDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('user-table')
+                    ->setTableId('departamento-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -92,9 +82,7 @@ class UserDataTable extends DataTable
     {
         return [
             Column::make('action')->title('Ações')->searchable(false)->orderable(false),
-            Column::make('name')->title('Nome'),
-            Column::make('email')->title('Email'),
-            Column::make('status')->title('Status')->addClass('text-center'),
+            Column::make('descricao')->title('Descrição'),
             Column::make('created_at')->title('Cadastro')->addClass('text-center'),
             Column::make('updated_at')->title('Atualizado')->addClass('text-center'),
         ];
@@ -107,6 +95,6 @@ class UserDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'User_' . date('YmdHis');
+        return 'Departamento_' . date('YmdHis');
     }
 }

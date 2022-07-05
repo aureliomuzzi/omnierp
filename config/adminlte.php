@@ -236,6 +236,11 @@ return [
             'url'         => 'users',
             'icon'        => 'fas fa-user',
         ],
+        [
+            'text'        => 'Departamentos',
+            'url'         => 'departamentos',
+            'icon'        => 'fas fa-industry',
+        ],
     ],
 
     /*

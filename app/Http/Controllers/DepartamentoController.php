@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\UserRequest;
-use App\DataTables\UserDataTable;
+use App\Http\Requests\DepartamentoRequest;
+use App\DataTables\DepartamentoDataTable;
+use App\Models\Departamento;
 
-class UserController extends Controller
+class DepartamentoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UserDataTable $dataTable)
+    public function index(DepartamentoDataTable $dataTable)
     {
-        return $dataTable->render('users.index');
+        return $dataTable->render('departamentos.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.form');
+        return view('departamentos.form');
     }
 
     /**
@@ -35,18 +35,15 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(DepartamentoRequest $request)
     {
         $dados = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'status' => $request->status == '1' ? 1 : 0
+            'descricao' => $request->descricao,
         ];
 
-        User::create($dados);
+        Departamento::create($dados);
 
-        return redirect('/users')->with('mensagem', 'Registro criado com sucesso!');
+        return redirect('/departamentos')->with('mensagem', 'Registro criado com sucesso!');
     }
 
     /**
@@ -66,10 +63,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Departamento $departamento)
     {
-        return view('users.form', [
-            'user' => $user
+        return view('departamentos.form', [
+            'departamento' => $departamento
         ]);
     }
 
@@ -80,18 +77,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Departamento $departamento)
     {
         $dados = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password ? bcrypt($request->password) : $user->password,
-            'status' => $request->status == '' ? 0 : 1
+            'descricao' => $request->descricao,
         ];
 
-        $user->update($dados);
+        $departamento->update($dados);
 
-        return redirect('/users')->with('mensagem', 'Registro criado com sucesso!');
+        return redirect('/departamentos')->with('mensagem', 'Registro criado com sucesso!');
     }
 
     /**
@@ -102,8 +96,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $usuario = User::find($id);
-        $usuario->delete();
-        return redirect('/users')->with('mensagem', 'Registro excluído com sucesso!');
+        $departamento = Departamento::find($id);
+        $departamento->delete();
+        return redirect('/departamentos')->with('mensagem', 'Registro excluído com sucesso!');
     }
 }

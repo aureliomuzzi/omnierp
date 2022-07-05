@@ -1,18 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuários')
-
-
+@section('title', 'Departamentos')
 
 @section('content_header')
-<h1 class="m-0 text-dark"><i class="fas fa-user"></i>  Usuário </h1>
+<h1 class="m-0 text-dark"><i class="fas fa-industry"></i>  Departamentos </h1>
 @stop
 
 @section('content')
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">
-            Lista de Usuários do Sistema
+            Lista de Departamentos
         </h3>
     </div>
 
