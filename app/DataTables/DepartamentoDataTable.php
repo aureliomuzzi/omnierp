@@ -60,7 +60,7 @@ class DepartamentoDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
-                    ->orderBy(0)
+                    ->orderBy(1, 'asc')
                     ->buttons(
                         Button::make('excel')->text("<i class='fas fa-file-excel'></i> Exportar Excel"),
                         Button::make('print')->text("<i class='fas fa-print'></i> Imprimir"),

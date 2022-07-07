@@ -1,16 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Pessoas')
+@section('title', 'Funcionarios')
 
 @section('content_header')
-<h1 class="m-0 text-dark"><i class="fas fa-users"></i>  Pessoas </h1>
+<h1 class="m-0 text-dark"><i class="fas fa-users"></i>  Funcionarios </h1>
 @stop
 
 @section('content')
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">
-            Lista de Pessoas Físicas e Jurídicas
+            Lista de Funcionarios
         </h3>
     </div>
 

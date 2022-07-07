@@ -155,8 +155,7 @@
                             <a href="#modalEndereco" data-toggle="modal" data-target="#modalEndereco" class="btn btn-outline-secondary"><i class="fas fa-address-card"></i> Endereço</a>
                             <a href="#modalContato" data-toggle="modal" data-target="#modalContato" class="btn btn-outline-warning"><i class="fas fa-phone"></i> Contato</a>
                         @endif
-                        <a href="{{ route('pessoas.index') }}" class="btn btn-outline-dark"><i class="fas fa-list"></i> Listar</a>
-                        <button type="submit" class="btn btn-outline-success"><i class="fas fa-save"></i> Salvar</button>
+                        @component('components.botoes', ['cancelar' => route('pessoas.index'), 'listar' => route('pessoas.index')])@endcomponent
                     </div>
 
                 {!! Form::close() !!}

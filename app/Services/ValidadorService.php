@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class Validador{
+class ValidadorService {
 
 	public function validaCPF($cpf = null) {
 

@@ -46,4 +46,16 @@ class FuncoesHelper
 
         return $valorComMascara;
     }
+
+    public static function anoLetivo()
+    {
+        $anos = [];
+        $ano = date('Y');
+
+        for ($i = $ano; $i <= $ano + 4; $i++) {
+            $anos[$i] = $i;
+        }
+
+        return $anos;
+    }
 }

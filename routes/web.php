@@ -6,6 +6,7 @@ use App\Http\Controllers\EnderecoController;
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DepartamentoController;
+use App\Http\Controllers\FuncionarioController;
 
 Auth::routes();
 
@@ -25,4 +26,7 @@ Route::middleware('auth')->group(function() {
 
     Route::resource('departamentos', DepartamentoController::class)->except(['destroy']);
     Route::get('/departamentos/{id}/destroy', [DepartamentoController::class, 'destroy'])->name('departamentos.destroy');
+
+    Route::resource('funcionarios', FuncionarioController::class)->except(['destroy']);
+    Route::get('/funcionarios/{id}/destroy', [FuncionarioController::class, 'destroy'])->name('funcionarios.destroy');
 });

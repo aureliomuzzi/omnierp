@@ -241,6 +241,11 @@ return [
             'url'         => 'departamentos',
             'icon'        => 'fas fa-industry',
         ],
+        [
+            'text'        => 'Funcionarios',
+            'url'         => 'funcionarios',
+            'icon'        => 'fas fa-users',
+        ],
     ],
 
     /*

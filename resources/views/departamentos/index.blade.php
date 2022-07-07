@@ -22,7 +22,7 @@
         @endif
 
         <div class="table-responsive">
-            {{ $dataTable->table(['style' => 'width: 100%']) }}
+            {{ $dataTable->table(['class'=>'table table-striped','style' => 'width: 100%']) }}
         </div>
 
 
