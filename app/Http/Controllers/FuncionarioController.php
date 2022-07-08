@@ -11,6 +11,7 @@ use App\Services\UploadService;
 use App\Services\ValidadorService;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class FuncionarioController extends Controller
 {
@@ -80,7 +81,10 @@ class FuncionarioController extends Controller
      */
     public function edit(Funcionario $funcionario)
     {
-        //
+
+        return view('funcionarios.form', [
+            'funcionario' => $funcionario,
+        ]);
     }
 
     /**
@@ -92,7 +96,24 @@ class FuncionarioController extends Controller
      */
     public function update(Request $request, Funcionario $funcionario)
     {
-        //
+        try {
+            $validador = new ValidadorService();
+            $dados = $request->all();
+
+            if ($validador->validaCPF($dados['cpf']) == false) {
+                return redirect()->back()->with(['tipo'=>'danger', 'mensagem'=>'O Número de CPF é Inválido.']);
+            }
+
+            $dados['cpf'] = FuncoesHelper::removerCaracter($request->cpf);
+            $dados['foto'] = isset($request->foto) ? UploadService::upload($request->foto) : $funcionario->foto;
+
+            $funcionario->update($dados);
+
+            return redirect('/funcionarios')->with(['tipo'=>'success', 'mensagem'=>'Registro atualizado com sucesso!']);
+        } catch (Exception $exception) {
+            Log::error($exception);
+            return redirect()->back()->withErrors(['tipo'=>'danger', 'mensagem'=>'Erro ao realizar operação.']);
+        }
     }
 
     /**
@@ -101,8 +122,10 @@ class FuncionarioController extends Controller
      * @param  \App\Models\Funcionario  $funcionario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Funcionario $funcionario)
+    public function destroy($id)
     {
-        //
+        $funcionario = Funcionario::find($id);
+        $funcionario->delete();
+        return redirect('/funcionarios')->with(['tipo'=>'success', 'mensagem'=>'Registro excluído com sucesso!']);
     }
 }

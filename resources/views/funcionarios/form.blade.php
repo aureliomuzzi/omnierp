@@ -22,10 +22,10 @@
             <div class="card-body">
                 @include('includes.alerts')
 
-                @if (!isset($funcioario))
+                @if (!isset($funcionario))
 	    			{!! Form::open(['url' => route('funcionarios.store'), 'files' => true]) !!}
                 @else
-                    {!! Form::model($funcioario, ['route' => ['funcionarios.update', $funcioario->id], 'method' => 'PUT', 'files' => true]) !!}
+                    {!! Form::model($funcionario, ['route' => ['funcionarios.update', $funcionario->id], 'method' => 'PUT', 'files' => true]) !!}
                 @endif
 
                 <div class="row">
@@ -57,19 +57,19 @@
                                     <div class="col-lg-4 col-md-12">
                                         <div class="form-group">
                                             {!! Form::label('data_nascimento', 'Data de Nascimento') !!}
-                                            {!! Form::date('data_nascimento', isset($funcionario) ? $funcionario->data_nascimento->format('Y-m-d') : null, ['class' => 'form-control', 'placeholder' => 'Data de Nascimento']) !!}
+                                            {!! Form::date('data_nascimento', isset($funcionario) ? $funcionario->data_nascimento : null, ['class' => 'form-control', 'placeholder' => 'Data de Nascimento']) !!}
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-12">
                                         <div class="form-group">
                                             {!! Form::label('data_admissao', 'Data de Admissão') !!}
-                                            {!! Form::date('data_admissao', isset($funcionario) ? $funcionario->data_admissao->format('Y-m-d') : null, ['class' => 'form-control', 'placeholder' => 'Data de Admissão']) !!}
+                                            {!! Form::date('data_admissao', isset($funcionario) ? $funcionario->data_admissao : null, ['class' => 'form-control', 'placeholder' => 'Data de Admissão']) !!}
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-12">
                                         <div class="form-group">
                                             {!! Form::label('data_demissao', 'Data de Demissão') !!}
-                                            {!! Form::date('data_demissao', isset($funcionario) ? $funcionario->data_demissao->format('Y-m-d') : null, ['class' => 'form-control', 'placeholder' => 'Data de Demissão']) !!}
+                                            {!! Form::date('data_demissao', isset($funcionario) ? $funcionario->data_demissao : null, ['class' => 'form-control', 'placeholder' => 'Data de Demissão']) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -89,6 +89,7 @@
                                     @else
                                         <img src="/images/avatar.png" alt="" height="250px" class="d-block img-rounded">
                                     @endif
+                                    <br>
                                     <label for="foto">Foto do Funcionário</label>
                                     <input type="file" name="foto"/>
                                 </div>
