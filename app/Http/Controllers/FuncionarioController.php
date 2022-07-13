@@ -128,4 +128,33 @@ class FuncionarioController extends Controller
         $funcionario->delete();
         return redirect('/funcionarios')->with(['tipo'=>'success', 'mensagem'=>'Registro excluído com sucesso!']);
     }
+
+    public function demissaoRapida($id)
+    {
+        try {
+            $funcionario = Funcionario::find($id);
+            $funcionario->data_demissao = date(now());
+            $funcionario->update();
+
+            return redirect('/funcionarios')->with(['tipo'=>'success', 'mensagem'=>'Funcionário Demitido!']);
+        } catch (Exception $exception) {
+            Log::error($exception);
+            return redirect()->back()->withErrors(['tipo'=>'danger', 'mensagem'=>'Erro ao realizar operação.']);
+        }
+    }
+
+    public function readmissaoRapida($id)
+    {
+        try {
+            $funcionario = Funcionario::find($id);
+            $funcionario->data_admissao = date(now());
+            $funcionario->data_demissao = null;
+            $funcionario->update();
+
+            return redirect('/funcionarios')->with(['tipo'=>'success', 'mensagem'=>'Funcionário Readmitido!']);
+        } catch (Exception $exception) {
+            Log::error($exception);
+            return redirect()->back()->withErrors(['tipo'=>'danger', 'mensagem'=>'Erro ao realizar operação.']);
+        }
+    }
 }

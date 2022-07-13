@@ -155,6 +155,40 @@
             })
         }
 
+        function confirmarDemissao(registro) {
+            const url = registro.getAttribute("data-rota");
+            swal.fire({
+                title: 'Deseja Demitir este Funcionário na Data de Hoje?',
+                text: "Este Funcionário será Registrado como Demitido.",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não'
+            }).then(function (success) {
+                if (success.value === true) {
+                    window.location.href = url;
+                }
+            })
+        }
+
+        function confirmarReadmissao(registro) {
+            const url = registro.getAttribute("data-rota");
+            swal.fire({
+                title: 'Readmitir Funcionário na Data de Hoje?',
+                text: "Este Funcionário será Registrado como Readmitido.",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não'
+            }).then(function (success) {
+                if (success.value === true) {
+                    window.location.href = url;
+                }
+            })
+        }
+
         // API ViaCEP -- Inicio --
             var inputsCEP = $('#logradouro, #bairro, #localidade, #uf', '#cep');
             var inputsRUA = $('#cep, #bairro');

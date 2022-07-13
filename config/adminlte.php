@@ -223,29 +223,61 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Menu-Configuration
     |
     */
-
+    
     'menu' => [
-        ['header' => 'Cadastro Geral'],
+        
         [
-            'text'        => 'Pessoas',
-            'url'         => 'pessoas',
-            'icon'        => 'fas fa-users',
+            'text'    => 'Cadastros',
+            'icon'    => 'fas fa-regular fa-solar-panel',
+            'submenu' => [
+                [
+                    'text'        => 'Pessoas',
+                    'url'         => 'pessoas',
+                    'icon'        => 'fas fa-users',
+                ],
+                [
+                    'text'        => 'Usuários',
+                    'url'         => 'users',
+                    'icon'        => 'fas fa-user',
+                ],
+                [
+                    'text'        => 'Departamentos',
+                    'url'         => 'departamentos',
+                    'icon'        => 'fas fa-industry',
+                ],
+                [
+                    'text'        => 'Funcionarios',
+                    'url'         => 'funcionarios',
+                    'icon'        => 'fas fa-users',
+                ],
+               /* [
+                    'text'    => 'level_one',
+                    'url'     => '#',
+                    'submenu' => [
+                        [
+                            'text' => 'level_two',
+                            'url'  => '#',
+                        ],
+                        [
+                            'text'    => 'level_two',
+                            'url'     => '#',
+                            'submenu' => [
+                                [
+                                    'text' => 'level_three',
+                                    'url'  => '#',
+                                ],
+                                [
+                                    'text' => 'level_three',
+                                    'url'  => '#',
+                                ],
+                            ],
+                        ],
+                    ], 
+                 ], 
+                */
+            ],
         ],
-        [
-            'text'        => 'Usuários',
-            'url'         => 'users',
-            'icon'        => 'fas fa-user',
-        ],
-        [
-            'text'        => 'Departamentos',
-            'url'         => 'departamentos',
-            'icon'        => 'fas fa-industry',
-        ],
-        [
-            'text'        => 'Funcionarios',
-            'url'         => 'funcionarios',
-            'icon'        => 'fas fa-users',
-        ],
+        
     ],
 
     /*

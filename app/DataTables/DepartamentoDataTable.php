@@ -22,8 +22,8 @@ class DepartamentoDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('action', function($query) {
-                return '<a href="' . route('departamentos.edit', $query) . '" class="btn btn-primary btn-xs"><i class="fas fa-pen text-xs px-1"></i></a>
-                <a onclick="confirmarExclusao(this)" href="javascript:void(0)" data-rota="' . route('departamentos.destroy', $query->id) . '" class="btn btn-danger btn-xs"><i class="fas fa-trash text-xs px-1"></i></a>';
+                return '<a href="' . route('departamentos.edit', $query) . '" class="btn btn-outline-primary btn-xs"><i class="fas fa-pen text-xs px-1"></i></a>
+                <a onclick="confirmarExclusao(this)" href="javascript:void(0)" data-rota="' . route('departamentos.destroy', $query->id) . '" class="btn btn-outline-danger btn-xs"><i class="fas fa-trash text-xs px-1"></i></a>';
             })
             ->editColumn('descricao', function($query) {
                 return $query->descricao;
@@ -62,8 +62,8 @@ class DepartamentoDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(1, 'asc')
                     ->buttons(
-                        Button::make('excel')->text("<i class='fas fa-file-excel'></i> Exportar Excel"),
-                        Button::make('print')->text("<i class='fas fa-print'></i> Imprimir"),
+                        // Button::make('excel')->text("<i class='fas fa-file-excel'></i> Excel"),
+                        // Button::make('print')->text("<i class='fas fa-print'></i> PDF"),
                         Button::make('create')->text("<i class='fas fa-plus'></i> Novo Registro"),
                     )
                     ->parameters([

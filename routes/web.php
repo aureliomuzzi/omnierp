@@ -29,4 +29,7 @@ Route::middleware('auth')->group(function() {
 
     Route::resource('funcionarios', FuncionarioController::class)->except(['destroy']);
     Route::get('/funcionarios/{id}/destroy', [FuncionarioController::class, 'destroy'])->name('funcionarios.destroy');
+
+    Route::get('/funcionarios/{id}/demissao', [FuncionarioController::class, 'demissaoRapida'])->name('funcionarios.demissao');
+    Route::get('/funcionarios/{id}/readmissao', [FuncionarioController::class, 'readmissaoRapida'])->name('funcionarios.readmissao');
 });

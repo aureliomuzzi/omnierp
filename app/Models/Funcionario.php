@@ -6,10 +6,13 @@ use App\Helpers\FuncoesHelper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Funcionario extends Model
+class Funcionario extends Model implements Auditable
 {
     use HasFactory;
+    use \OwenIt\Auditing\Auditable;
+    
     protected $table = 'funcionarios';
     protected $garded = ['id', 'created_at', 'updated_at'];
     protected $dates = ['data_nascimento', 'data_admissao', 'data_demissao', 'created_at', 'updated_at'];

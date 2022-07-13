@@ -23,8 +23,10 @@ class FuncionarioDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('action', function($query) {
-                return '<a href="' . route('funcionarios.edit', $query) . '" class="btn btn-outline-primary btn-xs"><i class="fas fa-pen text-xs px-1"></i></a>
-                <a onclick="confirmarExclusao(this)" href="javascript:void(0)" data-rota="' . route('funcionarios.destroy', $query->id) . '" class="btn btn-outline-danger btn-xs"><i class="fas fa-trash text-xs px-1"></i></a>';
+                return 
+                '<a href="' . route('funcionarios.edit', $query) . '" class="btn btn-outline-primary btn-xs" data-toggle="tooltip" title="Editar Registro de Funcionário"><i class="fas fa-pen text-xs px-1"></i></a>
+                <a id="btDemissao" onclick="confirmarDemissao(this)" href="javascript:void(0)" data-rota="' . route('funcionarios.demissao', $query->id) . '" class="btn btn-outline-danger btn-xs" data-toggle="tooltip" title="Demitir este Funcionário na Data de Hoje?"><i class="fas fa-circle text-xs px-1"></i></a>
+                <a id="btReadmissao" onclick="confirmarReadmissao(this)" href="javascript:void(0)" data-rota="' . route('funcionarios.readmissao', $query->id) . '" class="btn btn-outline-success btn-xs" data-toggle="tooltip" title="Readmitir Funcionario na Data de Hoje?"><i class="fas fa-play text-xs px-1"></i></a>';
             })
             ->editColumn('foto', function($query) {
                 if (isset($query->foto)) {
@@ -45,9 +47,6 @@ class FuncionarioDataTable extends DataTable
             })
             ->editColumn('data_demissao', function($query) {
                 return isset($query->data_demissao) ? '<span class="badge badge-danger">' . $query->data_demissao->format("d/m/Y") . '</span>' : null;
-            })
-            ->editColumn('identidade', function($query) {
-                return $query->identidade;
             })
             ->editColumn('cpf', function($query) {
                 return $query->cpf_formatado;
@@ -80,8 +79,8 @@ class FuncionarioDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(2, 'asc')
                     ->buttons(
-                        Button::make('excel')->text("<i class='fas fa-file-excel'></i> Excel"),
-                        Button::make('pdf')->text("<i class='fas fa-file-pdf'></i> PDF"),
+                        // Button::make('excel')->text("<i class='fas fa-file-excel'></i> Excel"),
+                        // Button::make('pdf')->text("<i class='fas fa-file-pdf'></i> PDF"),
                         Button::make('create')->text("<i class='fas fa-plus'></i> Novo Registro"),
                     )
                     ->parameters([
@@ -105,7 +104,6 @@ class FuncionarioDataTable extends DataTable
             Column::make('data_nascimento')->title('Data de Nascimento')->searchable(false)->addClass('text-center'),
             Column::make('data_admissao')->title('Admissão')->searchable(false)->addClass('text-center')->searchable(false),
             Column::make('data_demissao')->title('Demissão')->searchable(false)->addClass('text-center'),
-            Column::make('identidade')->title('Identidade'),
             Column::make('cpf')->title('CPF'),
         ];
     }
